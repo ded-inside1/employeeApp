@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">employeeApp</string>
+    <string name="employees">Employees</string>
+    <string name="employee_list">Employee list</string>
+    <string name="loading_employees">Loading employees ...</string>
+    <string name="employee_name">Employee name</string>
+    <string name="employee_department">Employee department</string>
+    <string name="employee_position">Employee position</string>
 </resources>

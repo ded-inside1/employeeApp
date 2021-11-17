@@ -13,7 +13,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class Repository {
-    var employeeAPI: EmployeeAPI? = null
+    private var employeeAPI: EmployeeAPI? = null
     private var myCompositeDisposable: CompositeDisposable? = null
 
     init {
