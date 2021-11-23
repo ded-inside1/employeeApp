@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.github.lastachkin.employeeapp.EmployeeApp
 import com.github.lastachkin.employeeapp.databinding.EmployeeListItemBinding
 import com.github.lastachkin.employeeapp.model.entity.Employee
-import kotlinx.android.synthetic.main.employee_list_item.view.*
+import java.util.*
 
 
 class EmployeeAdapter(_employeeList: List<Employee>):
@@ -22,7 +22,6 @@ class EmployeeAdapter(_employeeList: List<Employee>):
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmployeeViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        //val inflater = inflater.inflate(R.layout.employee_list_item, null);
         val binding = EmployeeListItemBinding.inflate(inflater)
         return EmployeeViewHolder(binding);
     }
@@ -30,7 +29,7 @@ class EmployeeAdapter(_employeeList: List<Employee>):
     override fun onBindViewHolder(holder: EmployeeViewHolder, position: Int) {
 
         holder.binding.name.text = (employeeList!![position]!!.firstName + " " + employeeList!![position]!!.lastName)
-        holder.binding.userTag.text = employeeList!![position]!!.userTag
+        holder.binding.userTag.text = employeeList!![position]!!.userTag!!.toLowerCase(Locale.ROOT)
         holder.binding.position.text = employeeList!![position]!!.position
         Glide.with(EmployeeApp.applicationContext())
             .load(employeeList!![position]!!.avatarUrl)

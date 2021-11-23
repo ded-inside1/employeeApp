@@ -1,20 +1,16 @@
 package com.github.lastachkin.employeeapp.presentation.view.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
-import com.github.lastachkin.employeeapp.EmployeeApp
+import androidx.lifecycle.ViewModelProvider
 import com.github.lastachkin.employeeapp.databinding.FragmentEmployeeListBinding
 import com.github.lastachkin.employeeapp.model.service.EmployeeAPI
 import com.github.lastachkin.employeeapp.presentation.view.adapter.EmployeeAdapter
-import io.reactivex.android.schedulers.AndroidSchedulers
+import com.github.lastachkin.employeeapp.presentation.viewmodel.EmployeeListViewModel
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.employee_list_item.view.*
 
 class EmployeeListFragment: Fragment() {
 
@@ -23,37 +19,33 @@ class EmployeeListFragment: Fragment() {
     private var myCompositeDisposable: CompositeDisposable? = null
 
     init {
-
         employeeAPI = EmployeeAPI.create()
         myCompositeDisposable = CompositeDisposable()
+    }
 
+    companion object{
+        fun getInstance(): EmployeeListFragment {
+            return EmployeeListFragment()
+        }
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         val binding = FragmentEmployeeListBinding.inflate(layoutInflater)
 
-        myCompositeDisposable?.add(employeeAPI!!.getEmployees()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .subscribe( { list ->
-                if (list != null) {
-                    val adapter = EmployeeAdapter(list.employees!!)
-                    binding.employeeList.adapter = adapter
-                    binding.loadingEmployees.visibility = View.GONE
-                }
-            }, {
-                Log.e("LOG", it.message.toString())}))
+        val viewModel = ViewModelProvider(this).get(EmployeeListViewModel::class.java)
+
+        viewModel.employeeListObservable!!.observe(viewLifecycleOwner) { employees ->
+            if (employees != null) {
+                binding.loadingEmployees.visibility = View.GONE
+                val adapter = EmployeeAdapter(employees)
+                binding.employeeList.adapter = adapter
+            }
+        }
 
         return binding.root
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-    }
-
 }

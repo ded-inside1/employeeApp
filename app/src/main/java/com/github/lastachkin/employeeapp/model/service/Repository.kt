@@ -23,20 +23,16 @@ class Repository {
 
     }
 
-    fun getEmployees(){//<List<Employee>>
-        var data: MutableLiveData<List<Employee>>? = null
-
+    fun getEmployees(): LiveData<List<Employee>> {
+        val data: MutableLiveData<List<Employee>> = MutableLiveData()
 
         myCompositeDisposable?.add(employeeAPI!!.getEmployees()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .subscribe( { list ->
-                if (list != null) {
-                    for (employee in list.employees!!)
-                        Log.i("LOG", employee.lastName!!)
-                }
-                        }, {
-                Log.e("LOG", it.message.toString())}))
+            .subscribe( { list -> data.value = list.employees },
+                        { Log.e("LOG", it.message.toString())}))
+
+        return data
     }
 
     companion object{
