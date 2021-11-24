@@ -9,7 +9,6 @@ import com.github.lastachkin.employeeapp.databinding.EmployeeListItemBinding
 import com.github.lastachkin.employeeapp.model.entity.Employee
 import java.util.*
 
-
 class EmployeeAdapter(_employeeList: List<Employee>):
     RecyclerView.Adapter<EmployeeAdapter.EmployeeViewHolder>() {
 
@@ -18,7 +17,6 @@ class EmployeeAdapter(_employeeList: List<Employee>):
     init {
         employeeList = _employeeList
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmployeeViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -41,6 +39,5 @@ class EmployeeAdapter(_employeeList: List<Employee>):
     }
 
     class EmployeeViewHolder(val binding: EmployeeListItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-    }
+        RecyclerView.ViewHolder(binding.root)
 }

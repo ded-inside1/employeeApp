@@ -12,15 +12,21 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp">
+        android:background="@color/white">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <SearchView
+            android:id="@+id/searchView"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways">
-        </androidx.appcompat.widget.Toolbar>
+            android:layout_height="wrap_content"
+            android:iconifiedByDefault="false"
+            android:clickable="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:focusableInTouchMode="true"
+            android:queryHint="Enter name, tag, mail..."
+            android:background="@drawable/rounded_searchview"
+            android:queryBackground="@android:color/transparent">
+        </SearchView>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
