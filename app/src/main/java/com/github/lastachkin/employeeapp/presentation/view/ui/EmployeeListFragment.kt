@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.github.lastachkin.employeeapp.databinding.FragmentEmployeeListBinding
+import com.github.lastachkin.employeeapp.model.entity.EmployeeListType
 import com.github.lastachkin.employeeapp.model.service.EmployeeAPI
 import com.github.lastachkin.employeeapp.presentation.view.adapter.EmployeeAdapter
 import com.github.lastachkin.employeeapp.presentation.viewmodel.EmployeeListViewModel
@@ -24,8 +25,14 @@ class EmployeeListFragment: Fragment() {
     }
 
     companion object{
-        fun getInstance(): EmployeeListFragment {
-            return EmployeeListFragment()
+        private const val ARG_LIST_TYPE = "LIST_TYPE"
+
+        fun newInstance(employeeListType: EmployeeListType): EmployeeListFragment {
+            val fragment = EmployeeListFragment()
+            val args = Bundle()
+            args.putSerializable(ARG_LIST_TYPE, employeeListType)
+            fragment.arguments = args
+            return fragment
         }
     }
 
@@ -40,9 +47,9 @@ class EmployeeListFragment: Fragment() {
 
         viewModel.employeeListObservable!!.observe(viewLifecycleOwner) { employees ->
             if (employees != null) {
-                binding.loadingEmployees.visibility = View.GONE
                 val adapter = EmployeeAdapter(employees)
                 binding.employeeList.adapter = adapter
+                binding.loadingEmployees.visibility = View.GONE
             }
         }
 
