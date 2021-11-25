@@ -12,7 +12,7 @@ import java.util.*
 class EmployeeAdapter(_employeeList: List<Employee>):
     RecyclerView.Adapter<EmployeeAdapter.EmployeeViewHolder>() {
 
-    private var employeeList: List<Employee?>? = null
+    private var employeeList: List<Employee>? = null
 
     init {
         employeeList = _employeeList
@@ -26,11 +26,11 @@ class EmployeeAdapter(_employeeList: List<Employee>):
 
     override fun onBindViewHolder(holder: EmployeeViewHolder, position: Int) {
 
-        holder.binding.name.text = (employeeList!![position]!!.firstName + " " + employeeList!![position]!!.lastName)
-        holder.binding.userTag.text = employeeList!![position]!!.userTag!!.toLowerCase(Locale.ROOT)
-        holder.binding.position.text = employeeList!![position]!!.position
+        holder.binding.name.text = (employeeList!![position].firstName + " " + employeeList!![position].lastName)
+        holder.binding.userTag.text = employeeList!![position].userTag!!.toLowerCase(Locale.ROOT)
+        holder.binding.position.text = employeeList!![position].position
         Glide.with(EmployeeApp.applicationContext())
-            .load(employeeList!![position]!!.avatarUrl)
+            .load(employeeList!![position].avatarUrl)
             .into(holder.binding.profileImg)
     }
 

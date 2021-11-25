@@ -1,12 +1,14 @@
 package com.github.lastachkin.employeeapp.presentation.view.ui
 
+import android.graphics.Color
 import android.os.Bundle
-import android.view.Menu
 import android.view.MotionEvent
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowInsetsControllerCompat
 import com.github.lastachkin.employeeapp.databinding.ActivityMainBinding
+import com.github.lastachkin.employeeapp.model.entity.EmployeeListType
 import com.github.lastachkin.employeeapp.presentation.view.adapter.EmployeeViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -15,8 +17,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
+
+        window.statusBarColor = Color.WHITE
+        val wic = WindowInsetsControllerCompat(window, window.decorView)
+        wic.isAppearanceLightStatusBars = true
 
         binding.searchView.setOnQueryTextFocusChangeListener { _, hasFocus ->
             if(hasFocus){
@@ -27,15 +32,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.viewPager.adapter = EmployeeViewPagerAdapter(this)
+
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-            tab.text = when(position){
-                0 -> "All"
-                1 -> "Designers"
-                2 -> "Managers"
-                3 -> "Developers"
-                4 -> "Analysts"
-                else -> "TODO"
-            }
+            tab.text = EmployeeListType.values()[position].name
         }.attach()
     }
 

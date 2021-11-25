@@ -10,14 +10,6 @@ class EmployeeViewPagerAdapter(fa: FragmentActivity): FragmentStateAdapter(fa) {
 
     override fun createFragment(position: Int): Fragment {
         return EmployeeListFragment.newInstance(EmployeeListType.values()[position])
-//        when (position) {
-//            0 -> return EmployeeListFragment.newInstance(EmployeeListType.values()[position])
-//            1 -> return EmployeeListFragment.newInstance(EmployeeListType.Analysts)
-//            2 -> return EmployeeListFragment.newInstance(EmployeeListType.Designers)
-//            3 -> return EmployeeListFragment.newInstance(EmployeeListType.Developers)
-//            4 -> return EmployeeListFragment.newInstance(EmployeeListType.Managers)
-//        }
-//        return EmployeeListFragment.newInstance(EmployeeListType.All)
     }
 
     override fun getItemCount(): Int {
