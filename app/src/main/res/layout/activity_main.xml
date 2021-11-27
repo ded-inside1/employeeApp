@@ -16,19 +16,38 @@
         android:paddingTop="5dp"
         android:background="@color/white">
 
-        <SearchView
-            android:id="@+id/searchView"
+        <LinearLayout
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:iconifiedByDefault="false"
-            android:clickable="true"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:focusableInTouchMode="true"
-            android:queryHint="Enter name, tag, mail..."
-            android:background="@drawable/rounded_searchview"
-            android:queryBackground="@android:color/transparent">
-        </SearchView>
+            android:orientation="horizontal">
+
+            <SearchView
+                android:id="@+id/searchView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:iconifiedByDefault="false"
+                android:clickable="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:focusableInTouchMode="true"
+                android:layout_weight="1"
+                android:queryHint="Enter name, tag, mail..."
+                android:background="@drawable/rounded_searchview"
+                android:queryBackground="@android:color/transparent">
+            </SearchView>
+
+            <TextView
+                android:id="@+id/cancelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:visibility="gone"
+                android:layout_weight="2"
+                android:fontFamily="@font/inter_regular"
+                android:textStyle="bold"
+                android:textColor="#6534FF"
+                android:text="Cancel"/>
+        </LinearLayout>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"

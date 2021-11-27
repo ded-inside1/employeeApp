@@ -1,18 +1,21 @@
 package com.github.lastachkin.employeeapp.presentation.viewmodel
 
-import androidx.lifecycle.LiveData
+import android.annotation.SuppressLint
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.lastachkin.employeeapp.model.entity.Employee
+import com.github.lastachkin.employeeapp.model.entity.EmployeeListType
 import com.github.lastachkin.employeeapp.model.service.Repository
 
-class EmployeeListViewModel: ViewModel() {
-    var employeeListObservable: LiveData<List<Employee>>? = null
+class EmployeeListViewModel : ViewModel() {
+    var employeeListObservable = MutableLiveData<List<Employee>>()
 
-    init {
-        employeeListObservable = Repository.getInstance().getEmployees()
+    @SuppressLint("CheckResult")
+    internal fun getData(department: EmployeeListType) {
+        Repository.getInstance().getEmployees(department).subscribe({
+            employeeListObservable.value = it },
+                {
+                    it.printStackTrace() })
     }
-
-//    fun getEmployeesObservable(): LiveData<List<Employee>>{
-//        return employeeListObservable!!
-//    }
 }
