@@ -58,9 +58,7 @@ class EmployeeListFragment : Fragment() {
         departmentType?.let { viewModel?.getData(it) }
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                return false
-            }
+            override fun onQueryTextSubmit(p0: String?): Boolean { return false }
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 newText?.let { viewModel?.filterData(it) }
