@@ -1,6 +1,7 @@
 package com.github.lastachkin.employeeapp.model.service
 
 import com.github.lastachkin.employeeapp.model.entity.EmployeeResponse
+import com.github.lastachkin.employeeapp.util.Constants
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -16,19 +17,18 @@ interface EmployeeAPI {
 
     companion object{
         fun create() : EmployeeAPI {
-            val apiBaseUrl = "https://stoplight.io/mocks/kode-education/trainee-test/25143926/"
-
             val interceptor = HttpLoggingInterceptor()
             interceptor.apply {
                 interceptor.level = HttpLoggingInterceptor.Level.BODY
             }
+
             val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
 
             val retrofit = Retrofit.Builder()
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(client)
-                    .baseUrl(apiBaseUrl)
+                    .baseUrl(Constants.API_BASE_URL)
                     .build()
 
             return retrofit.create(EmployeeAPI::class.java)

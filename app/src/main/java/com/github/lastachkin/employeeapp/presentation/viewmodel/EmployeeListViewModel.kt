@@ -9,15 +9,16 @@ import io.reactivex.disposables.CompositeDisposable
 import java.util.*
 
 class EmployeeListViewModel : ViewModel() {
-    private val employeeList = mutableListOf<Employee>()
     var employeeListObservable = MutableLiveData<List<Employee>>()
+    private val employeeList = mutableListOf<Employee>()
     private val compositeDisposable = CompositeDisposable()
 
     internal fun getData(department: EmployeeListType) {
         compositeDisposable.add(Repository.getEmployees(department).subscribe({
-            employeeListObservable.value = it
+            // TODO: 03.12.2021 sorting?
+            employeeListObservable.value = it.sortedBy { it.lastName }
             employeeList.clear()
-            employeeList.addAll(it)
+            employeeList.addAll(it.sortedBy { it.lastName })
         }, { it.printStackTrace() }))
     }
 
