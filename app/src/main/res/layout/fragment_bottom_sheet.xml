@@ -11,7 +11,7 @@
         android:text="Sorting"
         android:fontFamily="@font/inter_regular"
         android:textFontWeight="600"
-        android:textSize="15pt"
+        android:textSize="20sp"
         android:textColor="#050510"
         android:textAlignment="center"/>
 
@@ -21,20 +21,20 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/white"
-        android:layout_marginTop="18dp">
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="40dp">
 
         <RadioButton
             android:id="@+id/option_alphabet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
             android:text="By alphabet" />
 
         <RadioButton
             android:id="@+id/option_birth_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
             android:text="By birth date" />
     </RadioGroup>
 </androidx.appcompat.widget.LinearLayoutCompat>

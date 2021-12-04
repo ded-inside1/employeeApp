@@ -39,6 +39,10 @@ class EmployeeListFragment : Fragment() {
             }
         }
 
+        BottomSheetFragment.isPausedState.observe(viewLifecycleOwner) { isPaused ->
+            if (isPaused) departmentType?.let { viewModel?.getData(it) }
+        }
+
         return binding.root
     }
 

@@ -21,6 +21,7 @@ class EmployeeApp : Application() {
 
         getSharedPreferences(Constants.SHARED_PREFS_NAME, 0).edit().apply {
             clear()
+            putBoolean(Constants.OPTION_ALPHABET, true)
             apply()
         }
     }

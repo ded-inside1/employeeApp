@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsControllerCompat
+import com.github.lastachkin.employeeapp.R
 import com.github.lastachkin.employeeapp.databinding.ActivityMainBinding
 import com.github.lastachkin.employeeapp.model.entity.EmployeeListType
+import com.github.lastachkin.employeeapp.model.service.Repository
 import com.github.lastachkin.employeeapp.presentation.view.adapter.EmployeeViewPagerAdapter
+import com.github.lastachkin.employeeapp.util.Constants
 import com.google.android.material.tabs.TabLayoutMediator
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -63,6 +65,15 @@ class MainActivity : AppCompatActivity() {
                 binding.cancel.visibility = View.GONE
                 binding.sortOptionMenu.visibility = View.VISIBLE
             }
+        }
+
+        // TODO: 05.12.2021 move to viewmodel?
+        BottomSheetFragment.isPausedState.observe(this) { isPaused ->
+            if (isPaused && Repository.getSortingOptions()[Constants.OPTION_BIRTH_DATE] == true)
+                binding.sortOptionMenu.setImageResource(R.drawable.ic_menu_painted)
+
+            if (isPaused && Repository.getSortingOptions()[Constants.OPTION_ALPHABET] == true)
+                binding.sortOptionMenu.setImageResource(R.drawable.ic_menu)
         }
     }
 }

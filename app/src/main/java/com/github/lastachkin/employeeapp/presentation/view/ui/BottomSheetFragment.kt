@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import com.github.lastachkin.employeeapp.R
 import com.github.lastachkin.employeeapp.databinding.FragmentBottomSheetBinding
@@ -13,8 +14,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomSheetFragment : BottomSheetDialogFragment() {
 
-    lateinit var binding: FragmentBottomSheetBinding
-    lateinit var viewModel: BottomSheetViewModel
+    private lateinit var viewModel: BottomSheetViewModel
+    private lateinit var binding: FragmentBottomSheetBinding
+
+    companion object{
+        val isPausedState = MutableLiveData<Boolean>()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +52,8 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         super.onResume()
 
         viewModel.getSortingOptions()
+
+        isPausedState.value = false
     }
 
     override fun onPause() {
@@ -56,6 +63,8 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             binding.optionAlphabet.isChecked,
             binding.optionBirthDate.isChecked
         )
+
+        isPausedState.value = true
     }
 
     override fun getTheme() = R.style.AppBottomSheetDialogTheme
