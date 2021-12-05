@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorPrimaryDark">#FFFFFFFF</color>
     <color name="purpleBlue">#6534FF</color>
+    <color name="placeholder_bg">#dddddd</color>
 </resources>

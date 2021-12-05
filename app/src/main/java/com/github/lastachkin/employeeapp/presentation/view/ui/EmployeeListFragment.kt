@@ -8,6 +8,7 @@ import android.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.github.lastachkin.employeeapp.R
 import com.github.lastachkin.employeeapp.databinding.FragmentEmployeeListBinding
 import com.github.lastachkin.employeeapp.model.entity.EmployeeListType
@@ -20,12 +21,14 @@ class EmployeeListFragment : Fragment() {
     private var departmentType: EmployeeListType? = null
     private var viewModel: EmployeeListViewModel? = null
 
+    private lateinit var binding: FragmentEmployeeListBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentEmployeeListBinding.inflate(layoutInflater)
+        binding = FragmentEmployeeListBinding.inflate(layoutInflater)
 
         departmentType = arguments?.getSerializable(ARG_LIST_TYPE) as EmployeeListType
 
@@ -35,7 +38,7 @@ class EmployeeListFragment : Fragment() {
             if (employees != null) {
                 rvAdapter.setData(employees)
 
-                binding.loadingEmployees.visibility = View.GONE
+                binding.shimmerViewContainer.visibility = View.GONE
             }
         }
 
@@ -69,6 +72,13 @@ class EmployeeListFragment : Fragment() {
                 return false
             }
         })
+
+        binding.shimmerViewContainer.startShimmerAnimation()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.shimmerViewContainer.stopShimmerAnimation()
     }
 
     companion object {

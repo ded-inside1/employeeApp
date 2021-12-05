@@ -1,6 +1,5 @@
 package com.github.lastachkin.employeeapp.presentation.view.ui
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,6 @@ import com.github.lastachkin.employeeapp.R
 import com.github.lastachkin.employeeapp.databinding.FragmentBottomSheetBinding
 import com.github.lastachkin.employeeapp.presentation.viewmodel.BottomSheetViewModel
 import com.github.lastachkin.employeeapp.util.Constants
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomSheetFragment : BottomSheetDialogFragment() {
