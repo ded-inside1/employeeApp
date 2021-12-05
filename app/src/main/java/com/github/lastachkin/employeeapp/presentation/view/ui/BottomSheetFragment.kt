@@ -1,15 +1,18 @@
 package com.github.lastachkin.employeeapp.presentation.view.ui
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import com.github.lastachkin.employeeapp.R
 import com.github.lastachkin.employeeapp.databinding.FragmentBottomSheetBinding
 import com.github.lastachkin.employeeapp.presentation.viewmodel.BottomSheetViewModel
 import com.github.lastachkin.employeeapp.util.Constants
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomSheetFragment : BottomSheetDialogFragment() {
@@ -44,6 +47,15 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 container
             )
         )
+
+        val anim = AnimationUtils.loadAnimation(context, R.anim.bounce)
+        binding.radioGroup.startAnimation(anim)
+
+        binding.optionAlphabet.setOnClickListener { dismiss() }
+
+        binding.optionBirthDate.setOnClickListener { dismiss() }
+
+        binding.arrowBack.setOnClickListener { dismiss() }
 
         return binding.root
     }

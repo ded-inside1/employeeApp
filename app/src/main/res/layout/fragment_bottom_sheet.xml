@@ -1,19 +1,36 @@
 <androidx.appcompat.widget.LinearLayoutCompat
+    android:id="@+id/bottom_sheet"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Sorting"
-        android:fontFamily="@font/inter_regular"
-        android:textFontWeight="600"
-        android:textSize="20sp"
-        android:textColor="#050510"
-        android:textAlignment="center"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/arrow_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:paddingTop="5dp"
+            android:clickable="true"
+            android:src="@drawable/ic_arrow_back" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:text="Sorting"
+            android:textAlignment="center"
+            android:textColor="#050510"
+            android:textFontWeight="600"
+            android:textSize="20sp" />
+    </FrameLayout>
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -21,20 +38,27 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/white"
-        android:layout_marginTop="18dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="10dp"
         android:layout_marginBottom="40dp">
 
         <RadioButton
             android:id="@+id/option_alphabet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:button="@drawable/radiobutton_background"
+            android:paddingStart="8dp"
+            tools:ignore="RtlSymmetry"
             android:text="By alphabet" />
 
         <RadioButton
             android:id="@+id/option_birth_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="By birth date" />
+            android:layout_marginTop="20dp"
+            android:paddingStart="8dp"
+            android:button="@drawable/radiobutton_background"
+            android:text="By birth date"
+            tools:ignore="RtlSymmetry" />
     </RadioGroup>
 </androidx.appcompat.widget.LinearLayoutCompat>
