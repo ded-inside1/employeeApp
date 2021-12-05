@@ -1,6 +1,7 @@
 package com.github.lastachkin.employeeapp.presentation.view.ui
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,6 +40,7 @@ class EmployeeListFragment : Fragment() {
                 rvAdapter.setData(employees)
 
                 binding.shimmerViewContainer.visibility = View.GONE
+                binding.employeeList.visibility = View.VISIBLE
             }
         }
 
