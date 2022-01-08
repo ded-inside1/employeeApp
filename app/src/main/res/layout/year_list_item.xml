@@ -1,0 +1,15 @@
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_regular"
+        android:text="2022"
+        android:textAlignment="center"
+        android:textColor="#050510"
+        android:textSize="@dimen/project_text"
+        android:textStyle="bold" />
+</androidx.appcompat.widget.LinearLayoutCompat>

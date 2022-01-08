@@ -40,7 +40,7 @@ class EmployeeListFragment : Fragment() {
                 rvAdapter.setData(employees)
 
                 binding.shimmerViewContainer.visibility = View.GONE
-                binding.employeeList.visibility = View.VISIBLE
+                binding.shimmerViewContainer.stopShimmerAnimation()
             }
         }
 
@@ -76,11 +76,6 @@ class EmployeeListFragment : Fragment() {
         })
 
         binding.shimmerViewContainer.startShimmerAnimation()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        binding.shimmerViewContainer.stopShimmerAnimation()
     }
 
     companion object {

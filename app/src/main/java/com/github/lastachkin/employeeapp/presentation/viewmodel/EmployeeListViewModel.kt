@@ -7,27 +7,34 @@ import com.github.lastachkin.employeeapp.model.entity.EmployeeListType
 import com.github.lastachkin.employeeapp.model.service.Repository
 import com.github.lastachkin.employeeapp.util.Constants
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import java.util.*
 
 class EmployeeListViewModel : ViewModel() {
     var employeeListObservable = MutableLiveData<List<Employee>>()
     private val employeeList = mutableListOf<Employee>()
-    private val compositeDisposable = CompositeDisposable()
 
     internal fun getData(department: EmployeeListType) {
         val sortingOption = Repository.getSortingOptions().filter { it.value }
 
-        compositeDisposable.add(Repository.getEmployees(department).subscribe({
-            employeeListObservable.value = it.sortedBy { item ->
-                if (sortingOption.keys.contains(Constants.OPTION_ALPHABET)) item.lastName
-                else item.birthday
-            }
-            employeeList.clear()
-            employeeList.addAll(it.sortedBy { item ->
-                if (sortingOption.keys.contains(Constants.OPTION_ALPHABET)) item.lastName
-                else item.birthday
+        CoroutineScope(Job() + Dispatchers.Default).launch {
+            val employees = Repository.getEmployees(department)
+
+            employeeListObservable.postValue(employees?.sortedBy {
+                if (sortingOption.keys.contains(Constants.OPTION_ALPHABET)) it.lastName
+                else it.birthday
             })
-        }, { it.printStackTrace() }))
+
+            employeeList.clear()
+
+            employeeList.addAll(employees?.sortedBy {
+                if (sortingOption.keys.contains(Constants.OPTION_ALPHABET)) it.lastName
+                else it.birthday
+            }!!)
+        }
     }
 
     internal fun filterData(value: String) {
